@@ -1,0 +1,9 @@
+Input: 
+N value : 128
+L value: 1
+I value: 3.5
+Number of graphs: 100000
+Output:
+N value: 128
+Number of rounds: 1874955030
+Time taken in milliseconds: 1.9864589E7
