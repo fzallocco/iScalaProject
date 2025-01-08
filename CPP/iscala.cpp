@@ -4,7 +4,9 @@
 #include <cmath>
 #include <iostream>
 #include <algorithm>
-
+#include <stdio.h>
+#include <chrono>
+#include <omp.h>
 template <typename T>
 class Node {
 public:
