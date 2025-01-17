@@ -219,23 +219,23 @@ public:
 
             if (Status_Global != DONE) {
                 int newValue;
-                if (ceiling != -1 && floor != -1) {
+                if (ceiling != -1 && floor != -1) { /*If both aren't -1; the range is already defined*/
                     if (Status_Global == LOW) {
-                        floor = k;
+                        floor = k; /*assign k to floor*/
                     }
                     if (Status_Global == HIGH) {
-                        ceiling = k;
+                        ceiling = k; /*keep ceiling as is*/
                     }
-                    newValue = floor + ((ceiling - floor) / 2);
+                    newValue = floor + ((ceiling - floor) / 2); /* floor + the difference divided by 2*/
                     Nodes_Utility[0].setK(newValue);
                 }
-                if (ceiling == -1 || floor == -1) {
+                if (ceiling == -1 || floor == -1) { /*the range was not defined yet */
                     if (Status_Global == LOW) {
-                        Nodes_Utility[0].setK(k * 2);
+                        Nodes_Utility[0].setK(k * 2); /*we double k to get to N's value faster */
                     }
-                    if (Status_Global == HIGH) {
-                        ceiling = k;
-                        floor = k / 2;
+                    if (Status_Global == HIGH) { /*executes only when status is high */
+                        ceiling = k; /*higher value*/
+                        floor = k / 2; /*smaller value*/
                         newValue = floor + ((ceiling - floor) / 2);
                         Nodes_Utility[0].setK(newValue);
                     }
@@ -243,10 +243,10 @@ public:
             }
 
             SwapArrays(Nodes_Utility, Nodes_Main);
-            std::cout << "Number of epochs: " << epoch << std::endl;
-            std::cout << "Status_Global " << Status_Global << std::endl;
+            std::cout << "Number of epochs: " << epoch << std::endl; /*shows how many epochs have passed*/
+            std::cout << "Status_Global " << Status_Global << std::endl; /*status should not be 0*/
             std::cout << "Floor " << floor << " Ceiling " << ceiling << std::endl;
-            std::cout << "Number of rounds: " << rounds << " K value: " << Nodes_Main[0].getK() << std::endl;
+            std::cout << "Number of rounds: " << rounds << " K value: " << Nodes_Main[0].getK() << std::endl; /*rounds left before convergence*/
             std::cout << "_________________________________________________________________" << std::endl;
         } while (Status_Global != DONE);
 
