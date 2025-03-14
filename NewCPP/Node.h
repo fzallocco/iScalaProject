@@ -2,6 +2,8 @@
 #ifndef NODE_H
 #define NODE_H
 
+#include <algorithm> // Include this header for std::swap
+
 template <typename T>
 class Node {
 public:
