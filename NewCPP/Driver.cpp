@@ -25,7 +25,7 @@ int main() {
     double probability = (2 * isoperimetricDynamicity) / number_of_v;
     // Number of graphs
     //int num_graphs = 10;
-    int num_graphs = 1000;
+    int num_graphs = 10000;
 
     Write_Graph wgf;
 
