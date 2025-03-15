@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <random>
+#include <algorithm>
 #include "DFS.h"
 
 class WS_Graph {

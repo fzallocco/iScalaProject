@@ -5,7 +5,7 @@
 #include <random>
 #include <cmath>
 #include "DFS.h"
-
+#include <algorithm>
 class RG_Graph {
 public:
     RG_Graph() : num_of_vertices(0), rand(std::random_device{}()) {}
