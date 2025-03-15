@@ -3,6 +3,7 @@
 #include <unordered_map>
 #include <random>
 #include <cmath>
+#include <string>
 #include <iostream>
 #include <algorithm>
 #include <chrono>

@@ -7,6 +7,7 @@
 template <typename T>
 class Node {
 public:
+    Node() : isSupervisor(false), potential(0), k(0), status(0), rho(0) {} // Default constructor
     Node(bool isSupervisor) : isSupervisor(isSupervisor), potential(0), k(0), status(0), rho(0) {}
     Node(const Node& other) : isSupervisor(other.isSupervisor), potential(other.potential), k(other.k), status(other.status), rho(other.rho) {}
 
