@@ -7,49 +7,61 @@
 #include <random>
 #include "ISCALA.h"
 #include "Node.h"
+#include "ER_Graph.h"
+#include "Read_Graph.h"
+#include "Write_Graph.h"
 
 int main() {
-    const int num_nodes = 10;
-    const int num_graphs = 5;
-    const int l = 5;
-    const double isoDynamicity = 0.5;
+    // Number of vertices
+    int number_of_v = 32;
+    // Isoperimetrical dynamicity
+    double isoperimetricDynamicity = (std::log(number_of_v) / std::log(2)) / 2;
+    // Probability
+    double probability = (2 * isoperimetricDynamicity) / number_of_v;
+    // Number of graphs
+    int num_graphs = 1000000;
 
-    std::vector<Node<int>> nodes(num_nodes);
-    std::unordered_map<std::string, std::vector<std::vector<int>>> graphs;
+    Write_Graph wgf;
 
-    // Initialize nodes
-    for (int i = 0; i < num_nodes; i++) {
-        nodes[i].setK(1);
-        nodes[i].setStatus(ISCALA<int>::PROBING);
-        nodes[i].setPotential(0);
-        nodes[i].setRho(0);
-        nodes[i].setSupervisor(i % 2 == 0); // Set some nodes as supervisors
-    }
+    ER_Graph er_gen;
 
-    // Initialize graphs
+    // Write graphs
     for (int i = 0; i < num_graphs; i++) {
-        std::vector<std::vector<int>> adjList(num_nodes);
-        for (int j = 0; j < num_nodes; j++) {
-            for (int k = 0; k < num_nodes; k++) {
-                if (j != k && std::rand() % 2) {
-                    adjList[j].push_back(k);
-                }
-            }
-        }
-        graphs["graph_" + std::to_string(i)] = adjList;
+        std::vector<std::vector<int>> graph_er = er_gen.generate(probability, number_of_v);
+        wgf.write({"Test_Folder", "ER"}, "Graphs_ER_N" + std::to_string(number_of_v) + "_V" + std::to_string(num_graphs), graph_er, true);
+    }
+    std::cout << wgf.getLocation() << std::endl;
+
+    // Read graphs from file
+    Read_Graph rg;
+    rg.read_graphs({"Test_Folder", "ER"}, "Graphs_ER_N" + std::to_string(number_of_v) + "_V" + std::to_string(num_graphs));
+    std::unordered_map<std::string, std::vector<std::vector<int>>> graphs = rg.getGraphs();
+
+    // Number of vertices
+    int number_of_l = 1;
+
+    // Make new empty Node array
+    std::vector<Node<int>> Nodes(number_of_v);
+    // Populate array of Nodes via for loop
+    for (int i = 0; i < number_of_v; i++) {
+        bool isSupervisor = i < number_of_l;
+        Nodes[i].setSupervisor(isSupervisor);
     }
 
-    ISCALA<int> iscala;
+    ISCALA<int> sim;
 
+    // Time
     auto start = std::chrono::high_resolution_clock::now();
-    std::vector<long> result = iscala.ISCALA_algo(l, isoDynamicity, nodes, graphs, num_graphs);
-    auto end = std::chrono::high_resolution_clock::now();
 
+    // Run ISCALA
+    std::vector<long> output = sim.ISCALA_algo(number_of_l, isoperimetricDynamicity, Nodes, graphs, num_graphs);
+
+    auto end = std::chrono::high_resolution_clock::now();
     std::chrono::duration<double> elapsed = end - start;
 
-    std::cout << "Target value: " << result[0] << std::endl;
-    std::cout << "Rounds taken: " << result[1] << std::endl;
-    std::cout << "Execution time: " << elapsed.count() << " seconds" << std::endl;
+    std::cout << "Time: " << elapsed.count() << " seconds" << std::endl;
+    std::cout << "N: " << output[0] << std::endl;
+    std::cout << "Rounds: " << output[1] << std::endl;
 
     return 0;
 }
