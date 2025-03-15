@@ -6,7 +6,7 @@ CUDA_FLAGS = -arch=sm_86
 
 test_obj_exe_run:
 					$(GCC) -c Node.h ISCALA.h DFS.h ER_Graph.h Read_Graph.h Write_Graph.h Driver.cpp
-					$(GCC) -o Driver Node ISCALA DFS ER_Graph Read_Graph Write_Graph Driver
+					$(GCC) -o Node ISCALA DFS ER_Graph Read_Graph Write_Graph Driver
 					./Driver
 
 test_obj_cuda_run: 
