@@ -7,12 +7,14 @@ import java.util.List;
 public class Driver {
     public static <T> void main(String[] args) throws IOException {
         //Number of vertices
+        //int number_of_v = 32;
         int number_of_v = 3;
         //Isoperimetrical dynamicity
         double isoperimetricDynamicity = (Math.log(number_of_v) / Math.log(2)) / 2;
         //probability
         double probability = (2 * isoperimetricDynamicity) / number_of_v;
         //number of graphs
+        //int num_graphs = 1000000;
         int num_graphs = 3000;
 
         Write_Graph wgf = new Write_Graph();
