@@ -10,6 +10,10 @@
 #include "ER_Graph.h"
 #include "Read_Graph.h"
 #include "Write_Graph.h"
+#include "WS_Graph.h"
+#include "Star_Graph.h"
+#include "RG_Graph.h"
+#include "Path_Graph.h"
 
 int main() {
     // Number of vertices
@@ -19,11 +23,16 @@ int main() {
     // Probability
     double probability = (2 * isoperimetricDynamicity) / number_of_v;
     // Number of graphs
-    int num_graphs = 100;
+    //int num_graphs = 100;
+    int num_graphs = 1000000;
 
     Write_Graph wgf;
 
     ER_Graph er_gen;
+    WS_Graph ws_gen;
+    Star_Graph star_gen;
+    RG_Graph rg_gen;
+    Path_Graph path_gen;
 
     // Write graphs
     for (int i = 0; i < num_graphs; i++) {
