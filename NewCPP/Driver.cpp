@@ -18,14 +18,14 @@
 int main() {
     // Number of vertices
     //int number_of_v = 3;
-    int number_of_v = 5;
+    int number_of_v = 10;
     // Isoperimetrical dynamicity
     double isoperimetricDynamicity = (std::log(number_of_v) / std::log(2)) / 2;
     // Probability
     double probability = (2 * isoperimetricDynamicity) / number_of_v;
     // Number of graphs
     //int num_graphs = 10;
-    int num_graphs = 5000;
+    int num_graphs = 10000;
 
     Write_Graph wgf;
 
