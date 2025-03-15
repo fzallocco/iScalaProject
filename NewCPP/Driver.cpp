@@ -19,7 +19,7 @@ int main() {
     // Probability
     double probability = (2 * isoperimetricDynamicity) / number_of_v;
     // Number of graphs
-    int num_graphs = 1000000;
+    int num_graphs = 100;
 
     Write_Graph wgf;
 
